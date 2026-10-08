@@ -1,0 +1,576 @@
+<!doctype html>
+
+<html lang="id">
+
+<head>
+
+  <meta charset="utf-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="theme-color" content="#FFD6E2" />
+
+  <meta name="description" content="CyberIbu - cek link mencurigakan dan edukasi keamanan digital keluarga." />
+
+  <title>CyberIbu | Cek Link & Aman Digital</title>
+
+  <link rel="icon" type="image/png" href="logo-cyberibu.png" />
+  <link rel="apple-touch-icon" href="logo-cyberibu.png" />
+
+  <link rel="stylesheet" href="cyberibu-pink-v4.css?v=7" />
+
+
+
+<script>
+
+(async function clearOldCyberIbuCache(){
+
+  try {
+
+    if ('serviceWorker' in navigator) {
+
+      const regs = await navigator.serviceWorker.getRegistrations();
+
+      for (const reg of regs) await reg.unregister();
+
+    }
+
+    if ('caches' in window) {
+
+      const keys = await caches.keys();
+
+      for (const key of keys) {
+
+        if (key.toLowerCase().includes('cyberibu')) {
+
+          await caches.delete(key);
+
+        }
+
+      }
+
+    }
+
+  } catch (e) {
+
+    console.log('Cache cleanup skipped:', e);
+
+  }
+
+})();
+
+</script>
+
+
+
+
+<style>
+/* CyberIbu custom mother-logo */
+.brand-logo {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+  border-radius: 16px;
+  background: transparent;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand > span:last-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.brand > span:last-child strong {
+  line-height: 1.1;
+}
+
+.brand > span:last-child small {
+  margin-top: 3px;
+}
+
+@media (max-width: 640px) {
+  .brand-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+}
+</style>
+
+</head>
+
+<body style="background:#FFF8FA;">
+
+<header class="header">
+
+  <div class="container nav">
+
+    <a class="brand" href="#home">
+
+      <img src="logo-cyberibu.png" alt="Logo CyberIbu" class="brand-logo" />
+
+      <span><strong>CyberIbu</strong><small>Aman Digital untuk Keluarga</small></span>
+
+    </a>
+
+
+
+    <button id="menuBtn" class="menu-btn" aria-label="Buka menu">☰</button>
+
+    <nav id="navMenu" class="nav-links">
+
+      <a href="#cek-link">Cek Link</a>
+
+      <a href="#assessment">Cek Keamanan</a>
+
+      <a href="#proteksi">Proteksi Akun</a>
+
+      <a href="#darurat">Panduan Darurat</a>
+
+      <a href="#tentang">Tentang</a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+
+<main>
+
+  <section class="hero" id="home">
+
+    <div class="container hero-grid">
+
+      <div>
+
+        <span class="kicker">CYBER SAFETY CHECKER</span>
+
+        <h1>Cek link sebelum Ibu klik.</h1>
+
+        <p class="lead">
+
+          Tempel link dari WhatsApp, SMS, marketplace, email, atau media sosial.
+
+          CyberIbu akan memeriksa indikator phishing, penipuan, short-link, dan
+
+          download berisiko tanpa membuka link tersebut.
+
+        </p>
+
+
+
+        <div class="hero-search">
+
+          <label for="heroUrlInput">Tempel link mencurigakan</label>
+
+          <div class="search-row">
+
+            <input id="heroUrlInput" type="text" autocomplete="off" spellcheck="false"
+
+              placeholder="https://contoh-link.com/login" />
+
+            <button id="heroCheckBtn" class="btn primary">Cek Link</button>
+
+          </div>
+
+          <p class="privacy-note">🔒 Link tidak dibuka oleh browser. Pemeriksaan dilakukan melalui analisis URL dan, jika diaktifkan, reputasi keamanan dari backend.</p>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="hero-card">
+
+        <span class="card-label">Contoh hasil</span>
+
+        <div class="status-pill high">RISIKO TINGGI</div>
+
+        <div class="demo-score">82<span>/100</span></div>
+
+        <strong>Indikasi phishing</strong>
+
+        <p>Domain mencurigakan, kata “verify/login”, dan pola URL yang menyerupai halaman akun.</p>
+
+        <div class="mini-rule"></div>
+
+        <small>Jangan login melalui link. Buka aplikasi resmi secara manual.</small>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <section class="section" id="cek-link">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <span class="kicker">FITUR UTAMA</span>
+
+        <h2>Cek Link Mencurigakan</h2>
+
+        <p>Masukkan satu URL. Hasil akan menunjukkan tingkat risiko, kategori indikasi, temuan, dan rekomendasi.</p>
+
+      </div>
+
+
+
+      <div class="checker-layout">
+
+        <div class="panel checker-panel">
+
+          <label class="input-label" for="urlInput">Link yang ingin diperiksa</label>
+
+          <p style="margin:-2px 0 10px;color:#796b71;font-size:13px;">Tempel link dari WhatsApp/SMS/email, atau drag teks link ke kotak di bawah.</p>
+
+          <div class="search-row">
+
+            <input id="urlInput" type="text" autocomplete="off" spellcheck="false"
+
+              placeholder="Tempel link di sini..." />
+
+            <button id="checkBtn" class="btn primary">Periksa</button>
+
+          </div>
+
+
+
+          <div id="loadingBox" class="loading hidden">
+
+            <span class="spinner"></span>
+
+            <span>Sedang menganalisis struktur link dan reputasi yang tersedia...</span>
+
+          </div>
+
+
+
+          <div id="resultBox" class="result-box hidden">
+
+            <div class="result-head">
+
+              <div>
+
+                <span class="muted">Hasil analisis</span>
+
+                <h3 id="classification">-</h3>
+
+              </div>
+
+              <div id="riskBadge" class="status-pill">-</div>
+
+            </div>
+
+
+
+            <div class="score-line">
+
+              <div>
+
+                <span class="muted">Skor risiko</span>
+
+                <strong id="riskScore">0/100</strong>
+
+              </div>
+
+              <div class="meter"><div id="riskBar" class="meter-fill"></div></div>
+
+            </div>
+
+
+
+            <div class="domain-box">
+
+              <span class="muted">Domain</span>
+
+              <strong id="hostname">-</strong>
+
+            </div>
+
+
+
+            <div class="risk-category-section">
+
+              <h4>Kategori risiko</h4>
+
+              <div id="riskCategories" class="risk-category-grid"></div>
+
+            </div>
+
+
+
+            <div class="result-columns">
+
+              <div>
+
+                <h4>Kenapa hasilnya seperti ini?</h4>
+
+                <ul id="findingsList" class="list"></ul>
+
+              </div>
+
+              <div>
+
+                <h4>Apa yang sebaiknya dilakukan?</h4>
+
+                <ul id="recommendationsList" class="list"></ul>
+
+              </div>
+
+            </div>
+
+
+
+            <div id="vtBox" class="vt-box hidden">
+
+              <div>
+
+                <span class="muted">VirusTotal reputation</span>
+
+                <strong id="vtSummary">-</strong>
+
+              </div>
+
+              <small id="vtNote"></small>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <aside class="panel side-panel">
+
+          <h3>Apa yang diperiksa?</h3>
+
+          <div class="feature-row"><span>01</span><p>Domain tiruan, punycode, IP langsung, dan subdomain berlebihan.</p></div>
+
+          <div class="feature-row"><span>02</span><p>Kata mendesak seperti login, verify, hadiah, OTP, refund, atau akun diblokir.</p></div>
+
+          <div class="feature-row"><span>03</span><p>Short-link dan pola URL yang menyembunyikan tujuan asli.</p></div>
+
+          <div class="feature-row"><span>04</span><p>Link menuju file berisiko seperti APK, EXE, BAT, atau script.</p></div>
+
+          <div class="feature-row"><span>05</span><p>Reputasi URL dari VirusTotal jika API key diaktifkan pada backend.</p></div>
+
+
+
+          <div class="warning-box">
+
+            <strong>Catatan</strong>
+
+            <p>Tidak ada pemeriksa URL yang dapat menjamin 100% sebuah link aman. Jangan masukkan password, OTP, PIN, atau data kartu ke situs yang belum terverifikasi.</p>
+
+          </div>
+
+        </aside>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <section class="section pink-soft" id="assessment">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <span class="kicker">SELF CHECK</span>
+
+        <h2>Seberapa aman kebiasaan digital Ibu?</h2>
+
+        <p>Jawab pertanyaan singkat untuk mendapatkan skor keamanan pribadi.</p>
+
+      </div>
+
+
+
+      <div class="assessment-grid">
+
+        <div class="panel">
+
+          <div class="progress-top">
+
+            <span id="qCounter">Pertanyaan 1 dari 6</span>
+
+            <span id="qPercent">17%</span>
+
+          </div>
+
+          <div class="progress"><div id="qBar"></div></div>
+
+
+
+          <h3 id="questionText"></h3>
+
+          <div id="answerOptions" class="answer-options"></div>
+
+
+
+          <div class="actions">
+
+            <button id="prevQ" class="btn secondary">Sebelumnya</button>
+
+            <button id="nextQ" class="btn primary">Berikutnya</button>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="panel score-card">
+
+          <span class="muted">Skor keamanan digital</span>
+
+          <div id="assessmentScore" class="big-score">--</div>
+
+          <strong id="assessmentLabel">Belum dinilai</strong>
+
+          <p id="assessmentAdvice">Selesaikan self-check untuk mendapatkan rekomendasi.</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <section class="section" id="proteksi">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <span class="kicker">PROTEKSI PRAKTIS</span>
+
+        <h2>Amankan akun dalam 5 menit</h2>
+
+        <p>Centang tindakan yang sudah dilakukan. Progress tersimpan di browser perangkat ini.</p>
+
+      </div>
+
+      <div id="checklistGrid" class="check-grid"></div>
+
+      <div class="panel check-summary">
+
+        <strong id="checkSummary">0 dari 8 selesai</strong>
+
+        <div class="meter"><div id="checkBar" class="meter-fill"></div></div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <section class="section pink-soft" id="darurat">
+
+    <div class="container">
+
+      <div class="section-title">
+
+        <span class="kicker">JIKA SUDAH TERJADI</span>
+
+        <h2>Panduan darurat</h2>
+
+        <p>Pilih masalah yang sedang dialami untuk melihat langkah awal yang aman.</p>
+
+      </div>
+
+      <div id="emergencyTabs" class="tabs"></div>
+
+      <div id="emergencyPanel" class="panel emergency-panel"></div>
+
+    </div>
+
+  </section>
+
+
+
+  <section class="section" id="tentang">
+
+    <div class="container about-grid">
+
+      <div>
+
+        <span class="kicker">TENTANG CYBERIBU</span>
+
+        <h2>Teknologi keamanan yang mudah dipahami keluarga.</h2>
+
+      </div>
+
+      <div class="about-copy">
+
+        <p>
+
+          CyberIbu dirancang sebagai project edukasi keamanan digital untuk membantu ibu dan keluarga
+
+          mengenali phishing, social engineering, APK berbahaya, pencurian OTP, dan pola penipuan digital.
+
+        </p>
+
+        <p>
+
+          Pemeriksa link menggabungkan analisis struktur URL dengan reputasi eksternal bila backend
+
+          dikonfigurasi. Hasilnya adalah indikator risiko, bukan jaminan absolut bahwa sebuah situs aman.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+
+<footer>
+
+  <div class="container footer-inner">
+
+    <div><strong>CyberIbu</strong><small>Cyber safety for every family.</small></div>
+
+    <span>Prototype edukasi keamanan digital</span>
+
+  </div>
+
+</footer>
+
+
+
+<script src="cyberibu-pink-v9.js?v=9"></script>
+
+</body>
+
+</html>

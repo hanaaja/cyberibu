@@ -1,0 +1,13 @@
+{
+  "name": "cyberibu",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CyberIbu - link risk checker and cyber safety education",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
